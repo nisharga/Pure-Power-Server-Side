@@ -24,7 +24,6 @@ const client = new MongoClient(uri, {
 app.get("/", (req, res) => {
   res.send("I Love Express");
 });
- 
 
 app.listen(port, () => {
   console.log("port listen");
@@ -33,8 +32,7 @@ app.listen(port, () => {
 async function run() {
   try {
     await client.connect();
-    //        const dbCollection = client.db("glueganserver").collection("user"); 
-    
+    const productCollection = client.db("Pure-Power").collection("product");
   } finally {
     //        await client.close()
   }
