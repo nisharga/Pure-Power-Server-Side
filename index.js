@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 //mondodb_Clint start
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.qemdz.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://Nisharga:aDj8QSwONIMYsWtK@cluster0.qemdz.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -33,6 +33,11 @@ async function run() {
   try {
     await client.connect();
     const productCollection = client.db("Pure-Power").collection("product");
+    app.post("/addproduct", async (req, res) => {
+      const data = req.body;
+      const result = await productCollection.insertOne(data);
+      console.log(result, "product create on db");
+    });
   } finally {
     //        await client.close()
   }
