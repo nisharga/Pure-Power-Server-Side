@@ -33,11 +33,23 @@ async function run() {
   try {
     await client.connect();
     const productCollection = client.db("Pure-Power").collection("product");
+
+    // product added on mongoDB
     app.post("/addproduct", async (req, res) => {
       const data = req.body;
       const result = await productCollection.insertOne(data);
       console.log(result, "product create on db");
     });
+    // product added on mongoDB
+
+    // product get from mongoDB
+    app.get("/product", async (req, res) => {
+      const query = {};
+      const cursor = productCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    // product get from mongoDB
   } finally {
     //        await client.close()
   }
