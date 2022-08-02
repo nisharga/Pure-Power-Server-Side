@@ -42,14 +42,24 @@ async function run() {
     });
     // product added on mongoDB
 
-    // product get from mongoDB
+    // product all prduct from mongoDB
     app.get("/product", async (req, res) => {
       const query = {};
       const cursor = productCollection.find(query);
       const data = await cursor.toArray();
       res.send(data);
     });
-    // product get from mongoDB
+    // product all prduct from mongoDB
+
+    // product a prduct from mongoDB
+    app.get("/inventory/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const cursor = productCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    // product a prduct from mongoDB
   } finally {
     //        await client.close()
   }
