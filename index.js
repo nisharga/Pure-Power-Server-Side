@@ -79,6 +79,18 @@ async function run() {
       res.send(data);
     });
     // get item from DB search by email
+
+    // update a field from mongoDB
+    app.put("/delivered/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const data = req.body;
+      const update = { $set: data };
+      const options = { upsert: true };
+      const result = await productCollection.updateOne(query, update, options);
+      console.log(data, "deliverystatus updated");
+    });
+    // update a field from mongoDB
   } finally {
     //        await client.close()
   }
