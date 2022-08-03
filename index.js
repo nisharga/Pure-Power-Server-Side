@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
-
+require("mongodb").ObjectID;
 //middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -51,7 +51,7 @@ async function run() {
     });
     // product all prduct from mongoDB
 
-    // product a prduct from mongoDB.
+    //   a prduct from mongoDB.
     app.get("/inventory/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
@@ -59,7 +59,7 @@ async function run() {
       const data = await cursor.toArray();
       res.send(data);
     });
-    // product a prduct from mongoDB.
+    //  a prduct from mongoDB.
   } finally {
     //        await client.close()
   }
