@@ -60,6 +60,25 @@ async function run() {
       res.send(data);
     });
     //  a prduct from mongoDB.
+
+    //  all product from mongoDB.
+    app.get("/allproduct", async (req, res) => {
+      const query = {};
+      const cursor = productCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    //  all product from mongoDB.
+
+    // get item from DB search by email
+    app.get("/myitems/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { email: id };
+      const cursor = productCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    // get item from DB search by email
   } finally {
     //        await client.close()
   }
