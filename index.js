@@ -91,6 +91,30 @@ async function run() {
       console.log(data, "deliverystatus updated");
     });
     // update a field from mongoDB
+
+    // Delet a product from mongoDB
+    app.delete("/allproduct/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await productCollection.deleteOne(query);
+      if (result.deletedCount === 1) {
+        console.log("Sucessfully deleted ");
+      }
+      res.send(result);
+    });
+    // Delet a product from mongoDB
+
+    // Delet a product my items from mongoDB
+    app.delete("/myitems/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await productCollection.deleteOne(query);
+      if (result.deletedCount === 1) {
+        console.log("Sucessfully deleted ");
+      }
+      res.send(result);
+    });
+    // Delet a product my items from mongoDB
   } finally {
     //        await client.close()
   }
